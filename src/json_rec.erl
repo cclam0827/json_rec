@@ -44,12 +44,12 @@
 to_json(Record, Module) when is_list(Module) ->
   Fields = module_rec_fields(Module,Record),
   Pl = rec_keys(Fields, Record, Module, []),
-  {struct, Pl};
+  {lists:reverse(Pl)};
 
 to_json(Record, Module) ->
   Fields = module_rec_fields([Module],Record),
   Pl = rec_keys(Fields,Record,[Module],[]),
-  {struct, Pl}.
+  {lists:reverse(Pl)}.
 
 
 rec_keys([], _Record, _Module, Acc) -> Acc;
@@ -72,7 +72,7 @@ field_value(Value, _Module, _Acc) when is_atom(Value) ->
 field_value([],_Module, Acc)  -> lists:reverse(Acc);
 field_value([{_,_}|_] = Pl, Module, Acc) ->
   %% it is a proplist, make it a dict
-  {struct, [{Key, Value} || {Key, V2} <- Pl,
+  {[{Key, Value} || {Key, V2} <- Pl,
     begin
       Value = field_value(V2, Module, Acc),
       true
