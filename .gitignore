@@ -1,6 +1,22 @@
+ebin/
+log/*.log
+.idea
 .eunit
 deps
+priv
 *.o
 *.beam
 *.plt
-ebin
+*.iml
+erl_crash.dump
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+*~
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
